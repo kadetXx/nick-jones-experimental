@@ -1,0 +1,31 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 10px;
+  background-color: #000000;
+}
+
+body {
+  overflow: hidden;
+}
+
+.nj-container {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
+}
+
+.nj-item {
+  padding: 2rem;
+  font-size: 3rem;
+  display: grid;
+  place-items: center;
+  position: relative;
+  will-change: transform;
+}
