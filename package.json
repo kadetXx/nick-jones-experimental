@@ -1,5 +1,5 @@
 {
-  "name": "nick-jonesinator",
+  "name": "nick-jones-experimental",
   "source": "src/index.html",
   "scripts": {
     "start": "parcel",

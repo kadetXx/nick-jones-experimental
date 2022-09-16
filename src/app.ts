@@ -129,11 +129,11 @@ export class NickJones {
       const colors = this.content[rotations];
 
       document.body.style.backgroundColor = colors.background;
+
       this.boxes.forEach((item, index) => {
         item.style.backgroundColor = colors.foreground;
         item.style.color = colors.background;
         item.style.borderColor = colors.background;
-
         item.style.display = rotations >= index + 2 ? "none" : "grid";
       });
     }
@@ -197,7 +197,7 @@ export class NickJones {
 }
 
 new NickJones([
-  { background: "#000000", foreground: "#FFFFFF" },
+  { background: "#CA90DE", foreground: "#45316D" },
   { background: "#000000", foreground: "#FFFFFF" },
   { background: "#B82C33", foreground: "#2F3337" },
   { background: "#000000", foreground: "#2DBA51" },

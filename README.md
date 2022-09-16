@@ -1,0 +1,17 @@
+## NickJones Experimental
+
+Rebuild of [NickJones's portfolio](https://narrowdesign.com/) using html/css/js and the fibonacci sequence.
+
+## Running The Project
+
+```bash
+yarn start
+```
+
+## Resources
+
+List of resources that were useful while I was looking for tips/ideas and in solving logical problems
+
+- [Maths Is Fun](https://www.mathsisfun.com/numbers/fibonacci-sequence.html)
+- [Inside Design By IvisionApp](https://www.invisionapp.com/inside-design/golden-ratio-designers/)
+- [Hindawi](https://www.hindawi.com/journals/ddns/2019/3149602/)
