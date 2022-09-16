@@ -6,8 +6,6 @@ interface IColorPair {
 }
 
 export class NickJones {
-  container: HTMLDivElement | null;
-  boxes: NodeListOf<HTMLDivElement>;
   vw: number;
   ease: number;
   frame?: number;
@@ -20,6 +18,8 @@ export class NickJones {
   scaleRatio: number;
   sequenceLength: number;
   content: IColorPair[];
+  boxes: NodeListOf<HTMLDivElement>;
+  container: HTMLDivElement | null;
   scroll: {
     current: number;
     target: number;
@@ -58,7 +58,7 @@ export class NickJones {
 
     this.container!.style.transformOrigin = `${originX}px ${originY}px`;
 
-    this.content.forEach((content, index) => {
+    this.content.forEach((_, index) => {
       const div = this.boxes[index] ?? document.createElement("div");
 
       div.setAttribute("class", "nj-item");
@@ -119,13 +119,13 @@ export class NickJones {
 
     const pos = Math.round((current / limit) * 100);
     const deg = (pos * maxAngle) / 100;
-    const rounded = Math.round(deg / 90) * 90;
+    const roundedDeg = Math.round(deg / 90) * 90;
 
-    this.snapTarget = rounded / degreeUnit;
+    this.snapTarget = roundedDeg / degreeUnit;
 
     // switch colors
-    if (rounded % 90 === 0) {
-      const rotations = rounded / 90;
+    if (roundedDeg % 90 === 0) {
+      const rotations = roundedDeg / 90;
       const colors = this.content[rotations];
 
       document.body.style.backgroundColor = colors.background;
@@ -153,6 +153,7 @@ export class NickJones {
   }
 
   onResize() {
+    // re-initializes viewport dependent values
     this.vw = window.innerWidth;
     this.squareSize = this.vw / this.gratio;
     this.scaleRatio = (this.vw - this.squareSize) / this.squareSize;
@@ -177,12 +178,13 @@ export class NickJones {
   }
 
   lerp(current: number, target: number, ease: number) {
+    // interpolates values to create smooth transition
     return current + (target - current) * ease;
   }
 
   clamp(min: number, max: number, value: number) {
-    const clamped = Math.min(Math.max(value, min), max);
-    return clamped;
+    // prevents value from exceeding min and max limits
+    return Math.min(Math.max(value, min), max);
   }
 
   addEventListeners() {
