@@ -69,7 +69,7 @@ export class NickJones {
 
       /**
        * scaling each box by our
-       * scaleRatio to the power of it's index
+       * scaleRatio to the power of the box's index
        * */
       const scale = Math.pow(this.scaleRatio, index);
 
@@ -77,7 +77,7 @@ export class NickJones {
        * here we're applying basic styling to each div
        * as well as setting transform origins (which we calculated earlier up there),
        * rotation (which is basically 90deg * box's index)
-       * and finally, scale (which we've also calculated up here)
+       * and finally, scale (which we've also calculated previously)
        */
       div.style.cssText = `
         position: absolute;
@@ -111,7 +111,7 @@ export class NickJones {
     this.scroll.target = this.clamp(min, limit, target);
 
     /** gradually transitions from
-     * current scroll value to taret
+     * current scroll value to target
      * scroll value using interpolation
      * */
     this.scroll.current = this.lerp(current, target, this.ease);
@@ -128,14 +128,14 @@ export class NickJones {
   async spinContainer() {
     /** remember that this function is repeatedly
      * called about 60x per second due to the
-     * animation frame we setup earlier
+     * animation frame we created earlier
      * */
     const { current, limit } = this.scroll;
     const lastBoxIndex = this.content.length - 1;
 
     /**
      * to get the value by which we should rotate the
-     * boxes' container, we're basically mapping/scaling
+     * boxes' container, we're have to map/scale
      * the value of total rotation to the value of total scroll,
      */
     const maxAngle = 90 * lastBoxIndex;
@@ -145,8 +145,8 @@ export class NickJones {
     /**
      * we're also mapping/scaling the value of
      * total scroll to the value of total scale sizes here.
-     * these one's are a bit tricky tho, I can't type everything
-     * about the logic behind
+     * This process is a bit tricky, I can't possibly type everything
+     * about the logic behind it.
      */
     const maxIndex = lastBoxIndex;
     const scaleUnit = maxIndex / limit;
@@ -160,21 +160,21 @@ export class NickJones {
 
     /** calculating percentage of total scrollable
      * height that we've scrolled already and then using
-     * it to find out how many degrees we've spinned already
+     * it to find out how many degrees our current rotation is
      * */
     const scrolledPercentage = Math.round((current / limit) * 100);
     const deg = (scrolledPercentage * maxAngle) / 100;
 
-    /** we're getting the closest 90deg to our
+    /** here we're calculating the closest 90deg to our
      * current rotation and then using it to get the
      * scroll position we need to move to in order
-     * to maintain an upright rotation
+     * to maintain an upright rotation (90deg or 180 or 270 etc)
      * */
     const closest90Deg = Math.round(deg / 90) * 90;
     this.snapTarget = closest90Deg / degreeUnit;
 
     /** when we move to a new upright rotation,
-     * we want to switch the background colors
+     * we'll have to switch the background colors
      * */
     if (closest90Deg % 90 === 0) {
       const rotations = closest90Deg / 90;
@@ -204,7 +204,9 @@ export class NickJones {
     }, transitionTime);
   }
 
-  /** re-initializes viewport dependent values */
+  /**
+   * re-initializing viewport dependent values on window resize
+   * */
   onResize() {
     this.vw = window.innerWidth;
     this.squareSize = this.vw / this.gratio;
