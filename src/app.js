@@ -1,32 +1,7 @@
 import NormalizeWheel from "normalize-wheel";
 
-interface IColorPair {
-  background: string;
-  foreground: string;
-}
-
 export class NickJones {
-  vw: number;
-  ease: number;
-  frame?: number;
-  gratio: number;
-  beizer: string;
-  timeout?: number;
-  snapTarget?: number;
-  spConstant: number;
-  squareSize: number;
-  scaleRatio: number;
-  sequenceLength: number;
-  content: IColorPair[];
-  boxes: NodeListOf<HTMLDivElement>;
-  container: HTMLDivElement | null;
-  scroll: {
-    current: number;
-    target: number;
-    limit: number;
-  };
-
-  constructor(content: IColorPair[]) {
+  constructor(content) {
     this.content = content;
     this.vw = window.innerWidth;
     this.sequenceLength = content.length;
@@ -61,7 +36,7 @@ export class NickJones {
     this.addEventListeners();
   }
 
-  init(): void {
+  init() {
     /** shrinkage points X and Y are the
      * approximate cordinates for spirals's origin
      * check resources for formula
@@ -82,7 +57,7 @@ export class NickJones {
     /** setting the transform origin of the boxes'
      * container because we'll be spinning it later on
      * */
-    this.container!.style.transformOrigin = `${originX}px ${originY}px`;
+    this.container.style.transformOrigin = `${originX}px ${originY}px`;
 
     this.content.forEach((_, index) => {
       const div = this.boxes[index] ?? document.createElement("div");
@@ -126,7 +101,7 @@ export class NickJones {
       : document.querySelectorAll(".nj-item");
   }
 
-  updateScroll(): void {
+  updateScroll() {
     const { current, target, limit } = this.scroll;
 
     /** clamps target scroll value and updates
@@ -181,7 +156,7 @@ export class NickJones {
      * from the origins we calculated earlier, we're rotating
      * and scaling the container according to scroll values
      * */
-    this.container!.style.transform = `rotate(${-currentDegree}deg) scale(${currentScale})`;
+    this.container.style.transform = `rotate(${-currentDegree}deg) scale(${currentScale})`;
 
     /** calculating percentage of total scrollable
      * height that we've scrolled already and then using
@@ -222,10 +197,10 @@ export class NickJones {
     const transitionTime = 500;
     this.scroll.target = this.snapTarget;
     this.scroll.current = this.snapTarget;
-    this.container!.style.transition = `transform ${transitionTime}ms ${this.beizer}`;
+    this.container.style.transition = `transform ${transitionTime}ms ${this.beizer}`;
 
     setTimeout(() => {
-      this.container!.style.transition = "unset";
+      this.container.style.transition = "unset";
     }, transitionTime);
   }
 
@@ -239,7 +214,7 @@ export class NickJones {
     this.init();
   }
 
-  onMouseWheel(e: WheelEvent): void {
+  onMouseWheel(e) {
     /** sets scroll target to distance scrolled
      * by the mouse wheel event. PS: we're slowing the scroll
      * speed here by about 30% because I thougt it was too fast
@@ -264,12 +239,12 @@ export class NickJones {
   }
 
   /** interpolates values to create smooth transition */
-  lerp(current: number, target: number, ease: number) {
+  lerp(current, target, ease) {
     return current + (target - current) * ease;
   }
 
   /** prevents value from exceeding min and max limits */
-  clamp(min: number, max: number, value: number) {
+  clamp(min, max, value) {
     return Math.min(Math.max(value, min), max);
   }
 

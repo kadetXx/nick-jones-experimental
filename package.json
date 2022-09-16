@@ -6,7 +6,6 @@
     "build": "parcel build"
   },
   "devDependencies": {
-    "@types/normalize-wheel": "^1.0.0",
     "parcel": "^2.7.0"
   },
   "dependencies": {
