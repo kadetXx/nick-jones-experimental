@@ -14,4 +14,4 @@ List of resources that were useful while I was looking for tips/ideas and in sol
 
 - [Maths Is Fun](https://www.mathsisfun.com/numbers/fibonacci-sequence.html)
 - [Inside Design By IvisionApp](https://www.invisionapp.com/inside-design/golden-ratio-designers/)
-- [Hindawi (wouldn't have suceeded without this one)](https://www.hindawi.com/journals/ddns/2019/3149602/)
+- [Hindawi (wouldn't have succeeded without this one)](https://www.hindawi.com/journals/ddns/2019/3149602/)
