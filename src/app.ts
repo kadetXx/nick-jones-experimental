@@ -31,10 +31,14 @@ export class NickJones {
     this.vw = window.innerWidth;
     this.sequenceLength = content.length;
 
-    this.gratio = 1.618; // golden ratio constant
-    this.spConstant = 0.2763; // shrinkage point constant (see resources in readme)
-    this.squareSize = this.vw / this.gratio; // width of main square
-    this.scaleRatio = (this.vw - this.squareSize) / this.squareSize; // % difference in box sizes
+    /** golden ratio constant */
+    this.gratio = 1.618;
+    /**  shrinkage point constant (see resources in readme) */
+    this.spConstant = 0.2763;
+    /** width of main square */
+    this.squareSize = this.vw / this.gratio;
+    /** % difference in box sizes */
+    this.scaleRatio = (this.vw - this.squareSize) / this.squareSize;
 
     this.container = document.querySelector(".nj-container");
     this.boxes = document.querySelectorAll(".nj-item");
@@ -259,12 +263,12 @@ export class NickJones {
     }, 300);
   }
 
-  // interpolates values to create smooth transition
+  /** interpolates values to create smooth transition */
   lerp(current: number, target: number, ease: number) {
     return current + (target - current) * ease;
   }
 
-  // prevents value from exceeding min and max limits
+  /** prevents value from exceeding min and max limits */
   clamp(min: number, max: number, value: number) {
     return Math.min(Math.max(value, min), max);
   }
