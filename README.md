@@ -10,7 +10,7 @@ yarn start
 
 ### Resources
 
-List of resources that were useful while I was looking for tips/ideas and in solving logical problems
+List of resources that were useful while I was looking for tips and ideas and formulas
 
 - [Maths Is Fun](https://www.mathsisfun.com/numbers/fibonacci-sequence.html)
 - [Inside Design By IvisionApp](https://www.invisionapp.com/inside-design/golden-ratio-designers/)
