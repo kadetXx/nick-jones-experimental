@@ -213,7 +213,7 @@ export class NickJones {
   }
 
   snapScroll() {
-    if (this.snapTarget === undefined) return;
+    if (this.snapTarget === undefined || this.snapTarget < 0) return;
 
     const transitionTime = 500;
     this.scroll.target = this.snapTarget;
