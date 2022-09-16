@@ -33,3 +33,9 @@ body {
   transition: background-color 0.3s ease-out, color 0.3s ease-out,
     border-color 0.3s ease-out;
 }
+
+@media screen and (min-width: 320px) and (max-width: 767px) and (orientation: portrait) {
+  .nj-heading {
+    font-size: 2rem;
+  }
+}

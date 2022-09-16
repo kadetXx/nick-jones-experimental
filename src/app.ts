@@ -85,7 +85,7 @@ export class NickJones {
 
       div.setAttribute("class", "nj-item");
       div.innerHTML = `
-        <h2>Content ${index + 1}</h2>
+        <h2 class='nj-heading'>Content ${index + 1}</h2>
       `;
 
       /**
