@@ -237,7 +237,8 @@ export class NickJones {
 
   onMouseWheel(e: WheelEvent): void {
     /** sets scroll target to distance scrolled
-     * by the mouse wheel event
+     * by the mouse wheel event. PS: we're slowing the scroll
+     * speed here by about 30% because I thougt it was too fast
      * */
     const { pixelY } = NormalizeWheel(e);
     this.scroll.target += pixelY * 0.3;
