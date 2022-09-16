@@ -282,12 +282,12 @@ export class NickJones {
 
 new NickJones([
   { background: "#CA90DE", foreground: "#45316D" },
-  { background: "#000000", foreground: "#FFFFFF" },
+  { background: "#CA90DE", foreground: "#45316D" },
   { background: "#B82C33", foreground: "#2F3337" },
   { background: "#000000", foreground: "#2DBA51" },
   { background: "#6BD4FF", foreground: "#406E89" },
   { background: "#53BDAD", foreground: "#35293F" },
   { background: "#E95E4A", foreground: "#301A31" },
   { background: "#D9CCBA", foreground: "#23242E" },
-  { background: "#000000", foreground: "#FFFFFF" },
+  { background: "#CA90DE", foreground: "#45316D" },
 ]);
