@@ -18,7 +18,7 @@ export class NickJones {
     this.container = document.querySelector(".nj-container");
     this.boxes = document.querySelectorAll(".nj-item");
     this.beizer = "cubic-bezier(0.25, 0.1, 0.0, 1.0)";
-    this.ease = 0.05;
+    this.ease = 0.18;
 
     /**
      * stores scroll values on user scroll to enable
