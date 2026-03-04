@@ -1,12 +1,12 @@
 {
   "name": "nick-jones-experimental",
-  "source": "src/index.html",
   "scripts": {
-    "start": "parcel",
-    "build": "parcel build"
+    "start": "vite src",
+    "build": "vite build",
+    "preview": "vite preview"
   },
   "devDependencies": {
-    "parcel": "^2.7.0"
+    "vite": "^6.4.1"
   },
   "dependencies": {
     "normalize-wheel": "^1.0.1"
