@@ -38,11 +38,11 @@ export class NickJones {
 
   init() {
     /** shrinkage points X and Y are the
-     * approximate cordinates for spirals's origin
+     * approximate coordinates for spirals's origin
      * check resources for formula
      * */
-    const skrinkagePointX = window.innerWidth * this.spConstant;
-    const skrinkagePointY = this.squareSize * this.spConstant;
+    const shrinkagePointX = window.innerWidth * this.spConstant;
+    const shrinkagePointY = this.squareSize * this.spConstant;
 
     /**
      * transform origins X and Y for the squares is
@@ -51,8 +51,8 @@ export class NickJones {
      * multiplying by just the golden ratio results
      * in a cone-shaped maze-grid or sort of
      */
-    const originX = skrinkagePointX * Math.pow(this.gratio, 2);
-    const originY = skrinkagePointY * Math.pow(this.gratio, 2);
+    const originX = shrinkagePointX * Math.pow(this.gratio, 2);
+    const originY = shrinkagePointY * Math.pow(this.gratio, 2);
 
     /** setting the transform origin of the boxes'
      * container because we'll be spinning it later on
@@ -125,7 +125,7 @@ export class NickJones {
     this.spinContainer();
   }
 
-  async spinContainer() {
+  spinContainer() {
     /** remember that this function is repeatedly
      * called about 60x per second due to the
      * animation frame we created earlier
@@ -178,16 +178,20 @@ export class NickJones {
      * */
     if (closest90Deg % 90 === 0) {
       const rotations = closest90Deg / 90;
-      const colors = this.content[rotations];
 
-      document.body.style.backgroundColor = colors.background;
+      if (rotations !== this.lastRotationIndex) {
+        this.lastRotationIndex = rotations;
+        const colors = this.content[rotations];
 
-      this.boxes.forEach((item, index) => {
-        item.style.backgroundColor = colors.foreground;
-        item.style.color = colors.background;
-        item.style.borderColor = colors.background;
-        item.style.display = rotations >= index + 2 ? "none" : "grid";
-      });
+        document.body.style.backgroundColor = colors.background;
+
+        this.boxes.forEach((item, index) => {
+          item.style.backgroundColor = colors.foreground;
+          item.style.color = colors.background;
+          item.style.borderColor = colors.background;
+          item.style.display = rotations >= index + 2 ? "none" : "grid";
+        });
+      }
     }
   }
 
@@ -199,7 +203,8 @@ export class NickJones {
     this.scroll.current = this.snapTarget;
     this.container.style.transition = `transform ${transitionTime}ms ${this.beizer}`;
 
-    setTimeout(() => {
+    clearTimeout(this.snapTimeout);
+    this.snapTimeout = setTimeout(() => {
       this.container.style.transition = "unset";
     }, transitionTime);
   }
@@ -217,16 +222,22 @@ export class NickJones {
   }
 
   onMouseWheel(e) {
+    /** cancel any in-progress snap transition so
+     * JS-driven scrolling takes over immediately
+     * */
+    clearTimeout(this.snapTimeout);
+    this.container.style.transition = "unset";
+
     /** sets scroll target to distance scrolled
      * by the mouse wheel event. PS: we're slowing the scroll
-     * speed here by about 30% because I thougt it was too fast
+     * speed here by about 30% because I thought it was too fast
      * */
     const { pixelY } = NormalizeWheel(e);
     this.scroll.target += pixelY * 0.3;
 
     /**
      * clears timeout that was set below on
-     * previous call because a new scroll event is hapenning
+     * previous call because a new scroll event is happening
      */
     clearTimeout(this.timeout);
 
@@ -255,9 +266,9 @@ export class NickJones {
       this.onMouseWheel(e);
     });
 
-    window.onresize = () => {
+    window.addEventListener('resize', () => {
       this.onResize();
-    };
+    });
   }
 }
 
