@@ -4,8 +4,11 @@ Rebuild of [NickJones's portfolio](https://narrowdesign.com/) using html/css/js 
 
 ### Running The Project
 
+No build step — the page is plain html/css/js. Open `index.html`, or serve the
+folder if you want a real origin:
+
 ```bash
-yarn start
+python3 -m http.server
 ```
 
 ### Resources

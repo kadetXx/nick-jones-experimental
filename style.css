@@ -1,0 +1,97 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  overflow: hidden;
+  background: #241539;
+}
+
+body {
+  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+    "Helvetica Neue", Arial, sans-serif;
+}
+
+#stage {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  background: var(--bg, #bd79d6);
+  cursor: grab;
+  touch-action: none;
+}
+
+#stage.dragging {
+  cursor: grabbing;
+}
+
+/* Inset by a hairline so the outermost borders sit inside the screen edge
+   instead of being sliced in half by it. The ring shows the stage colour. */
+#clip {
+  position: absolute;
+  inset: 6px;
+  overflow: hidden;
+}
+
+/* The whole nest pivots around the eye of the spiral: 72.36% / 72.36% */
+#spiral {
+  position: absolute;
+  inset: 0;
+  transform-origin: 72.36068% 72.36068%;
+  will-change: transform;
+}
+
+/* A golden rectangle. Every level is the same element, 1/phi the size,
+   rotated a further 90deg. */
+.frame {
+  position: absolute;
+  aspect-ratio: 1.6180339887/1;
+}
+
+.frame.child {
+  left: 100%;
+  top: 0;
+  width: 61.8033989%;
+  transform-origin: 0 0;
+  transform: rotate(90deg);
+}
+
+/* The square carved off each golden rectangle */
+.panel {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 61.8033989%;
+  height: 100%;
+  background: var(--panel, #3b2159);
+  border: 1px solid var(--line, #bd79d6);
+  overflow: hidden;
+}
+
+/* Plates are drawn, not loaded: no requests, and sharp from full-screen
+   down to the last sub-pixel square. */
+.art {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.art .ink {
+  fill: var(--ink, #c07be0);
+}
+
+.art .acc {
+  fill: var(--accent, #f0b6ff);
+}
+
+.art .line {
+  fill: none;
+  stroke: var(--ink, #c07be0);
+  stroke-linecap: round;
+}
