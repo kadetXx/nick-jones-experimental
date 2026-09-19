@@ -490,6 +490,67 @@
   stage.addEventListener("pointerdown", claimFullscreen);
   window.addEventListener("keydown", claimFullscreen);
 
+  // --- sound ------------------------------------------------------------
+  // The track only ever starts from the button. Pressing it is the gesture
+  // browsers require for audible playback, so nothing else has to arrange one.
+
+  var track = document.getElementById("track");
+  var soundBtn = document.getElementById("sound");
+
+  var ICON_ON =
+    '<svg viewBox="0 0 24 24" aria-hidden="true">' +
+    '<path class="cone" d="M4 9h3l5-4v14l-5-4H4z"/>' +
+    '<path d="M16 9.5a3.5 3.5 0 0 1 0 5"/>' +
+    '<path d="M18.5 7a7 7 0 0 1 0 10"/>' +
+    "</svg>";
+
+  var ICON_OFF =
+    '<svg viewBox="0 0 24 24" aria-hidden="true">' +
+    '<path class="cone" d="M4 9h3l5-4v14l-5-4H4z"/>' +
+    '<path d="M16 9.5l5 5"/>' +
+    '<path d="M21 9.5l-5 5"/>' +
+    "</svg>";
+
+  var playing = false;
+
+  function drawSoundBtn() {
+    soundBtn.innerHTML = playing ? ICON_ON : ICON_OFF;
+    soundBtn.setAttribute("aria-pressed", playing ? "true" : "false");
+    soundBtn.setAttribute("aria-label", playing ? "Turn sound off" : "Turn sound on");
+  }
+
+  function setPlaying(on) {
+    playing = on;
+    drawSoundBtn();
+  }
+
+  soundBtn.addEventListener("pointerdown", function (e) {
+    // Otherwise the press also drags the spiral and claims fullscreen.
+    e.stopPropagation();
+  });
+
+  soundBtn.addEventListener("click", function (e) {
+    e.stopPropagation();
+
+    if (playing) {
+      track.pause();
+      setPlaying(false);
+      return;
+    }
+
+    setPlaying(true);
+
+    var p = track.play();
+    // If the browser refuses anyway, put the button back rather than lie.
+    if (p && p.catch) {
+      p.catch(function () {
+        setPlaying(false);
+      });
+    }
+  });
+
+  drawSoundBtn();
+
   // --- loop -------------------------------------------------------------
 
   var lastIndex = null;

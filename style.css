@@ -95,3 +95,45 @@ body {
   stroke: var(--ink, #c07be0);
   stroke-linecap: round;
 }
+
+/* Sound toggle. It takes its colours from the section it sits on, so it
+   recolours with the rest of the page as the sequence turns. Set --radius to
+   reshape it: 50% a circle, 0 square, anything between rounded. */
+#sound {
+  position: absolute;
+  bottom: 18px;
+  left: 18px;
+  z-index: 2;
+
+  width: 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+
+  padding: 0;
+  border: 1px solid var(--line, #bd79d6);
+  border-radius: var(--radius, 50%);
+
+  background: var(--panel, #3b2159);
+  color: var(--bg, #bd79d6);
+
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+#sound svg {
+  width: 17px;
+  height: 17px;
+  display: block;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* The cone is solid; only the waves and the cross come and go. */
+#sound .cone {
+  fill: currentColor;
+  stroke: none;
+}
